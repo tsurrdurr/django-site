@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
+    <link href="{% static "sticky.css" %}" rel="stylesheet" type="text/css" media="screen" />
     <head>
         <meta charset="UTF-8">
         <title>Blog post</title>
     </head>
     <body>
+
     <h1>{{ post_title }}</h1>
     <p>Published by <span>Author: {{ author|title }}</span></p>
     <p>{{ post_content }}</p>
@@ -14,11 +17,47 @@
             <li>{{ item }}</li>
         {% endfor %}
     </ul>
+    <input type="button" value="add new sticky" id="click" />
+    <div id="one">
+    </div>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
+    <script type="text/javascript" >
+    function limitTextareaLine(e) {
+    if(e.keyCode == 13 && $(this).val().split("\n").length >= $(this).attr('rows')) {
+        return false;
+    }
+}
 
-    {% if comments %}
-        <p>This post has some comments</p>
-    {% else %}
-        <p>This post has no comments</p>
-    {% endif %}
+$(function() {
+  $('textarea.limited').keydown(limitTextareaLine);
+});
+
+
+$(function yellow() {
+    $( "div" ).draggable();
+});
+
+
+var x = "<div class='darkYellow'><div class='close'>x</div>sticky note <div class='lightYellow'><textarea maxlength='150' rows='14' cols='27' class='limited'></textarea></div></div>";
+
+
+$('#click').click(function () {
+    $('#one').append('<div class="note">'+x+'</div>');
+    $( ".darkYellow" ).draggable();
+    $('.close').each(function(){
+        $('.close').click(function() {
+            $(this).parent().remove();
+        });
+    });
+});
+
+$('.darkYellow').live("click", function() {
+        $(".index").removeClass("index");
+        $(this).addClass("index");
+        console.log($(this));
+});
+
+    </script>
     </body>
 </html>
