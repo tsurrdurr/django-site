@@ -3,13 +3,12 @@ from django.template.response import TemplateResponse
 import datetime
 
 def index(request):
-    return HttpResponse("Hello World in Django")
+    return HttpResponse("Index page (it's empty)")
 
 def blog(request):
     x = TemplateResponse(request, 'post.html', {})
     x.render()
     return HttpResponse(x)
-
 
 def today_is(request):
     now = datetime.datetime.now()

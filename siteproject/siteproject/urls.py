@@ -18,6 +18,7 @@ from django.contrib import admin
 from siteapp import views
 
 urlpatterns = [
+    url(r'^$', views.index, name='siteapp_index'),
     url(r'^siteapp/', include('siteapp.urls')),
     url(r'^admin/', admin.site.urls),
 ]
